@@ -815,31 +815,8 @@
       </div>
 
       <div class="section-title">Heute empfohlen</div>
-      <div class="recipe-row pb">
-        <div class="recipe-card" onclick="openRecipe('omelette')">
-          <div class="recipe-emoji-box">🍳</div>
-          <div class="recipe-info">
-            <div class="recipe-name">Spinat-Omelette</div>
-            <div class="recipe-meta"><span>⏱ 15 Min</span><span>🔥 320 kcal</span></div>
-          </div>
-          <div class="recipe-match">94%</div>
-        </div>
-        <div class="recipe-card" onclick="openRecipe('pasta')">
-          <div class="recipe-emoji-box">🍝</div>
-          <div class="recipe-info">
-            <div class="recipe-name">Pasta Napoli</div>
-            <div class="recipe-meta"><span>⏱ 20 Min</span><span>🔥 480 kcal</span></div>
-          </div>
-          <div class="recipe-match">87%</div>
-        </div>
-        <div class="recipe-card" onclick="openRecipe('salad')">
-          <div class="recipe-emoji-box">🥗</div>
-          <div class="recipe-info">
-            <div class="recipe-name">Griechischer Salat</div>
-            <div class="recipe-meta"><span>⏱ 10 Min</span><span>🔥 210 kcal</span></div>
-          </div>
-          <div class="recipe-match">81%</div>
-        </div>
+      <div class="recipe-row pb" id="home-recipe-row">
+        <!-- filled by JS -->
       </div>
     </div>
 
@@ -877,9 +854,14 @@
         <!-- filled by JS -->
       </div>
 
-      <div style="padding:20px 16px 24px;">
-        <button class="btn btn-primary" style="width:100%; font-size:16px; padding:18px;" onclick="navigate('recipes')">
-          🍽️ Rezepte anzeigen
+      <div style="padding:20px 16px 8px;">
+        <button class="btn btn-primary" style="width:100%; font-size:16px; padding:18px;" onclick="generateRecipes()">
+          ✨ KI-Rezepte generieren
+        </button>
+      </div>
+      <div style="padding:0 16px 24px;">
+        <button class="btn btn-ghost" style="width:100%; font-size:13px; padding:12px;" onclick="promptApiKey()">
+          🔑 API Key eingeben
         </button>
       </div>
     </div>
@@ -904,76 +886,8 @@
         </div>
       </div>
 
-      <div style="padding:0 16px; display:flex; flex-direction:column; gap:14px;" class="pb">
-        <div class="recipe-card-lg" onclick="openRecipe('omelette')">
-          <div class="recipe-card-img" style="background:linear-gradient(135deg,#FEF6E4,#FDEBC4)">🍳</div>
-          <div class="recipe-card-body">
-            <div class="recipe-card-name">Spinat-Omelette</div>
-            <div class="recipe-card-row">
-              <div class="recipe-card-tags">
-                <span class="tag tag-green">⏱ 15 Min</span>
-                <span class="tag tag-orange">🔥 320 kcal</span>
-              </div>
-              <div class="recipe-match">94%</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="recipe-card-lg" onclick="openRecipe('pasta')">
-          <div class="recipe-card-img" style="background:linear-gradient(135deg,#FEF0EE,#FDDDD9)">🍝</div>
-          <div class="recipe-card-body">
-            <div class="recipe-card-name">Pasta Napoli</div>
-            <div class="recipe-card-row">
-              <div class="recipe-card-tags">
-                <span class="tag tag-green">⏱ 20 Min</span>
-                <span class="tag tag-orange">🔥 480 kcal</span>
-              </div>
-              <div class="recipe-match">87%</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="recipe-card-lg" onclick="openRecipe('salad')">
-          <div class="recipe-card-img" style="background:linear-gradient(135deg,#EBF3EE,#D4E9DC)">🥗</div>
-          <div class="recipe-card-body">
-            <div class="recipe-card-name">Griechischer Salat</div>
-            <div class="recipe-card-row">
-              <div class="recipe-card-tags">
-                <span class="tag tag-green">⏱ 10 Min</span>
-                <span class="tag tag-orange">🔥 210 kcal</span>
-              </div>
-              <div class="recipe-match">81%</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="recipe-card-lg" onclick="openRecipe('pizza')">
-          <div class="recipe-card-img" style="background:linear-gradient(135deg,#FEF6E4,#FDEBC4)">🍕</div>
-          <div class="recipe-card-body">
-            <div class="recipe-card-name">Mini-Pizzen</div>
-            <div class="recipe-card-row">
-              <div class="recipe-card-tags">
-                <span class="tag tag-green">⏱ 25 Min</span>
-                <span class="tag tag-orange">🔥 560 kcal</span>
-              </div>
-              <div class="recipe-match">76%</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="recipe-card-lg" onclick="openRecipe('soup')">
-          <div class="recipe-card-img" style="background:linear-gradient(135deg,#EBF3EE,#D4E9DC)">🍲</div>
-          <div class="recipe-card-body">
-            <div class="recipe-card-name">Tomatensuppe</div>
-            <div class="recipe-card-row">
-              <div class="recipe-card-tags">
-                <span class="tag tag-green">⏱ 30 Min</span>
-                <span class="tag tag-orange">🔥 180 kcal</span>
-              </div>
-              <div class="recipe-match">72%</div>
-            </div>
-          </div>
-        </div>
+      <div id="recipe-list-container" style="padding:0 16px; display:flex; flex-direction:column; gap:14px;" class="pb">
+        <!-- filled by JS -->
       </div>
     </div>
 
@@ -990,58 +904,20 @@
       <div style="padding:16px;">
         <div class="week-header-card">
           <div class="week-header-title">Diese Woche gesamt</div>
-          <div class="week-total">2.410 <span style="font-size:18px;opacity:0.7">kcal/Tag</span></div>
-          <div class="week-total-label">⌀ Durchschnitt · 5 von 7 Tagen geplant</div>
+          <div class="week-total" id="week-total-kcal">– kcal/Tag</div>
+          <div class="week-total-label" id="week-planned">0 von 7 Tagen geplant</div>
         </div>
       </div>
 
-      <div class="week-days pb">
-        <div class="day-card">
-          <div class="day-name"><div class="day-abbr">Mo</div><div class="day-num">3</div></div>
-          <div class="day-dot"></div>
-          <div class="day-info"><div class="day-meal">Spinat-Omelette</div><div class="day-cal">320 kcal · 15 Min</div></div>
-          <div class="day-emoji">🍳</div>
-        </div>
-        <div class="day-card">
-          <div class="day-name"><div class="day-abbr">Di</div><div class="day-num">4</div></div>
-          <div class="day-dot"></div>
-          <div class="day-info"><div class="day-meal">Pasta Napoli</div><div class="day-cal">480 kcal · 20 Min</div></div>
-          <div class="day-emoji">🍝</div>
-        </div>
-        <div class="day-card">
-          <div class="day-name"><div class="day-abbr">Mi</div><div class="day-num">5</div></div>
-          <div class="day-dot"></div>
-          <div class="day-info"><div class="day-meal">Griech. Salat</div><div class="day-cal">210 kcal · 10 Min</div></div>
-          <div class="day-emoji">🥗</div>
-        </div>
-        <div class="day-card" onclick="showToast('➕ Mahlzeit für Donnerstag hinzufügen')">
-          <div class="day-name"><div class="day-abbr">Do</div><div class="day-num">6</div></div>
-          <div class="day-dot empty"></div>
-          <div class="day-info"><div class="day-empty">Noch nicht geplant</div></div>
-          <span style="color:var(--muted);font-size:20px;">+</span>
-        </div>
-        <div class="day-card">
-          <div class="day-name"><div class="day-abbr">Fr</div><div class="day-num">7</div></div>
-          <div class="day-dot"></div>
-          <div class="day-info"><div class="day-meal">Mini-Pizzen</div><div class="day-cal">560 kcal · 25 Min</div></div>
-          <div class="day-emoji">🍕</div>
-        </div>
-        <div class="day-card" onclick="showToast('➕ Mahlzeit für Samstag hinzufügen')">
-          <div class="day-name"><div class="day-abbr">Sa</div><div class="day-num">8</div></div>
-          <div class="day-dot empty"></div>
-          <div class="day-info"><div class="day-empty">Noch nicht geplant</div></div>
-          <span style="color:var(--muted);font-size:20px;">+</span>
-        </div>
-        <div class="day-card">
-          <div class="day-name"><div class="day-abbr">So</div><div class="day-num">9</div></div>
-          <div class="day-dot"></div>
-          <div class="day-info"><div class="day-meal">Tomatensuppe</div><div class="day-cal">180 kcal · 30 Min</div></div>
-          <div class="day-emoji">🍲</div>
-        </div>
-
-        <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="showToast('🛒 Einkaufsliste wurde erstellt!')">
+      <div id="week-days-container" class="week-days">
+      </div>
+      <div style="padding:0 16px 24px;margin-top:8px;">
+        <button class="btn btn-primary" style="width:100%;" onclick="generateShoppingList()">
           🛒 Einkaufsliste generieren
         </button>
+      </div>
+      <div style="display:none">
+        <!-- filled by JS -->
       </div>
     </div>
 
@@ -1196,15 +1072,22 @@
 
 <script>
   // ── State ──
-  const ingredients = ['🥚 Eier', '🧀 Käse', '🍅 Tomaten', '🥬 Spinat', '🍝 Nudeln', '🧅 Zwiebeln', '🧄 Knoblauch', '🫒 Olivenöl'];
+  let ingredients = JSON.parse(localStorage.getItem('fp_ingredients') || '["Eier","Käse","Tomaten","Spinat","Nudeln","Zwiebeln","Knoblauch","Olivenöl"]');
+  let aiRecipes = JSON.parse(localStorage.getItem('fp_recipes') || '[]');
+  let weekPlan = JSON.parse(localStorage.getItem('fp_week') || '{"Mo":null,"Di":null,"Mi":null,"Do":null,"Fr":null,"Sa":null,"So":null}');
+  let shoppingList = JSON.parse(localStorage.getItem('fp_shopping') || '[]');
+  let currentModalRecipe = null;
 
-  const recipes = {
-    omelette: { emoji:'🍳', name:'Spinat-Omelette', time:'⏱ 15 Min', kcal:'🔥 320 kcal', nKcal:'320', protein:'24g', carbs:'8g', fat:'22g', ingredients:['3 Eier', '100g frischer Spinat', '50g Käse (gerieben)', '1 Prise Salz & Pfeffer'] },
-    pasta:    { emoji:'🍝', name:'Pasta Napoli', time:'⏱ 20 Min', kcal:'🔥 480 kcal', nKcal:'480', protein:'16g', carbs:'72g', fat:'14g', ingredients:['200g Nudeln', '3 Tomaten', '2 Knoblauchzehen', 'Olivenöl, Salz, Basilikum'] },
-    salad:    { emoji:'🥗', name:'Griechischer Salat', time:'⏱ 10 Min', kcal:'🔥 210 kcal', nKcal:'210', protein:'8g', carbs:'12g', fat:'16g', ingredients:['2 Tomaten', '100g Feta', '½ Gurke', 'Oliven, Olivenöl, Oregano'] },
-    pizza:    { emoji:'🍕', name:'Mini-Pizzen', time:'⏱ 25 Min', kcal:'🔥 560 kcal', nKcal:'560', protein:'22g', carbs:'68g', fat:'24g', ingredients:['2 Tortillas oder Fladenbrote', '50g Käse', '2 Tomaten', 'Oregano, Knoblauch'] },
-    soup:     { emoji:'🍲', name:'Tomatensuppe', time:'⏱ 30 Min', kcal:'🔥 180 kcal', nKcal:'180', protein:'6g', carbs:'22g', fat:'8g', ingredients:['4 Tomaten', '1 Zwiebel', '2 Knoblauchzehen', 'Brühe, Sahne, Salz & Pfeffer'] },
-  };
+  // ── API Key Handling ──
+  function getApiKey() { return localStorage.getItem('fp_apikey') || ''; }
+  function saveApiKey(k) { localStorage.setItem('fp_apikey', k); }
+
+  function promptApiKey() {
+    const existing = getApiKey();
+    const key = prompt(existing ? 'Anthropic API Key ändern:' : 'Bitte gib deinen Groq API Key ein:\n(Kostenlos auf console.groq.com)', existing || '');
+    if (key && (key.startsWith('gsk_') || key.startsWith('sk-'))) { saveApiKey(key); showToast('✅ API Key gespeichert!'); }
+    else if (key) showToast('❌ Ungültiger Key – muss mit sk- beginnen');
+  }
 
   // ── Navigation ──
   function navigate(screen) {
@@ -1212,9 +1095,14 @@
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('screen-' + screen).classList.add('active');
     document.getElementById('nav-' + screen)?.classList.add('active');
+    if (screen === 'recipes') renderRecipeList();
+    if (screen === 'planner') renderWeekPlan();
+    if (screen === 'home') renderHomeRecipes();
   }
 
   // ── Ingredients ──
+  function saveIngredients() { localStorage.setItem('fp_ingredients', JSON.stringify(ingredients)); }
+
   function renderIngredients() {
     const grid = document.getElementById('ingredient-grid');
     const badge = document.getElementById('count-badge');
@@ -1233,44 +1121,182 @@
     if (!val) return;
     ingredients.push(val);
     input.value = '';
+    saveIngredients();
     renderIngredients();
     showToast('✅ ' + val + ' hinzugefügt!');
   }
 
   function removeIngredient(i) {
     ingredients.splice(i, 1);
+    saveIngredients();
     renderIngredients();
   }
 
   function simulateScan() {
-    showToast('🔍 KI scannt… 3 neue Zutaten erkannt!');
+    showToast('🔍 Simuliere Scanner…');
     setTimeout(() => {
-      ['🥦 Brokkoli', '🥕 Karotten', '🥛 Milch'].forEach(ing => {
+      ['Brokkoli', 'Karotten', 'Milch'].forEach(ing => {
         if (!ingredients.includes(ing)) ingredients.push(ing);
       });
+      saveIngredients();
       renderIngredients();
+      showToast('✅ 3 Zutaten erkannt!');
     }, 1200);
   }
 
-  // ── Filters ──
-  function setFilter(btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  // ── AI Recipe Generation ──
+  async function generateRecipes() {
+    const key = getApiKey();
+    if (!key) {
+      if (confirm('Du brauchst einen Anthropic API Key für echte Rezepte.\nJetzt eingeben?')) promptApiKey();
+      return;
+    }
+    if (ingredients.length === 0) { showToast('❌ Erst Zutaten hinzufügen!'); return; }
+
+    showLoading(true);
+    navigate('recipes');
+
+    try {
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key },
+        body: JSON.stringify({
+          model: 'llama-3.1-8b-instant',
+          max_tokens: 1500,
+          messages: [{
+            role: 'user',
+            content: `Du bist ein Kochassistent. Ich habe folgende Zutaten: ${ingredients.join(', ')}.
+Erstelle 5 Rezepte die ich damit kochen kann. Antworte NUR mit einem JSON Array, kein Text davor oder danach:
+[{"emoji":"🍳","name":"Rezeptname","time":20,"kcal":350,"protein":"18g","carbs":"30g","fat":"12g","match":95,"ingredients":["200g Zutat 1","2 Zutat 2"],"steps":["Schritt 1","Schritt 2","Schritt 3"]}]`
+          }]
+        })
+      });
+      const data = await res.json();
+      const text = data.choices[0].message.content.trim();
+      const clean = text.replace(/```json|```/g, '').trim();
+      aiRecipes = JSON.parse(clean);
+      localStorage.setItem('fp_recipes', JSON.stringify(aiRecipes));
+      renderRecipeList();
+      showToast('🎉 ' + aiRecipes.length + ' Rezepte gefunden!');
+    } catch(e) {
+      showToast('❌ Fehler: ' + (e.message || 'API Fehler'));
+      console.error(e);
+    } finally {
+      showLoading(false);
+    }
+  }
+
+  function showLoading(on) {
+    let el = document.getElementById('recipe-loading');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'recipe-loading';
+      el.style.cssText = 'position:fixed;inset:0;background:rgba(247,243,238,0.92);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;max-width:430px;margin:0 auto;';
+      el.innerHTML = '<div style="font-size:48px;animation:pulse 1s infinite">🍳</div><div style="font-family:DM Sans,sans-serif;font-size:16px;font-weight:600;color:#3D6B4F">KI sucht Rezepte…</div><div style="font-size:13px;color:#9A9690">Einen Moment bitte</div>';
+      document.getElementById('app').appendChild(el);
+    }
+    el.style.display = on ? 'flex' : 'none';
+  }
+
+  // ── Recipe Rendering ──
+  const bgColors = [
+    'linear-gradient(135deg,#FEF6E4,#FDEBC4)',
+    'linear-gradient(135deg,#FEF0EE,#FDDDD9)',
+    'linear-gradient(135deg,#EBF3EE,#D4E9DC)',
+    'linear-gradient(135deg,#EEF0FE,#D9DCFD)',
+    'linear-gradient(135deg,#FEF6E4,#FDEBC4)',
+  ];
+
+  function renderRecipeList() {
+    const container = document.getElementById('recipe-list-container');
+    if (!container) return;
+    if (aiRecipes.length === 0) {
+      container.innerHTML = `
+        <div style="text-align:center;padding:60px 24px;">
+          <div style="font-size:56px;margin-bottom:16px;">🍽️</div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;">Noch keine Rezepte</div>
+          <div style="font-size:14px;color:#9A9690;margin-bottom:24px;">Gib deine Zutaten ein und lass die KI Rezepte für dich erstellen!</div>
+          <button class="btn btn-primary" style="margin:0 auto;" onclick="navigate('scanner')">📸 Zu den Zutaten</button>
+        </div>`;
+      return;
+    }
+    container.innerHTML = aiRecipes.map((r, i) => `
+      <div class="recipe-card-lg" onclick="openRecipe(${i})">
+        <div class="recipe-card-img" style="background:${bgColors[i % bgColors.length]}">${r.emoji}</div>
+        <div class="recipe-card-body">
+          <div class="recipe-card-name">${r.name}</div>
+          <div class="recipe-card-row">
+            <div class="recipe-card-tags">
+              <span class="tag tag-green">⏱ ${r.time} Min</span>
+              <span class="tag tag-orange">🔥 ${r.kcal} kcal</span>
+            </div>
+            <div class="recipe-match">${r.match}%</div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  function renderHomeRecipes() {
+    const container = document.getElementById('home-recipe-row');
+    if (!container) return;
+    const list = aiRecipes.length > 0 ? aiRecipes : [
+      {emoji:'🍳',name:'Spinat-Omelette',time:15,kcal:320,match:94,_static:true,id:'omelette'},
+      {emoji:'🍝',name:'Pasta Napoli',time:20,kcal:480,match:87,_static:true,id:'pasta'},
+    ];
+    container.innerHTML = list.slice(0,3).map((r,i) => `
+      <div class="recipe-card" onclick="${r._static ? "openStaticRecipe('"+r.id+"')" : 'openRecipe('+i+')'}">
+        <div class="recipe-emoji-box">${r.emoji}</div>
+        <div class="recipe-info">
+          <div class="recipe-name">${r.name}</div>
+          <div class="recipe-meta"><span>⏱ ${r.time} Min</span><span>🔥 ${r.kcal} kcal</span></div>
+        </div>
+        <div class="recipe-match">${r.match}%</div>
+      </div>`).join('');
   }
 
   // ── Modal ──
-  function openRecipe(id) {
-    const r = recipes[id];
+  function openRecipe(i) {
+    const r = aiRecipes[i];
     if (!r) return;
+    currentModalRecipe = r;
     document.getElementById('modal-emoji').textContent = r.emoji;
     document.getElementById('modal-title').textContent = r.name;
-    document.getElementById('modal-time').textContent = r.time;
-    document.getElementById('modal-kcal').textContent = r.kcal;
-    document.getElementById('n-kcal').textContent = r.nKcal;
+    document.getElementById('modal-time').textContent = '⏱ ' + r.time + ' Min';
+    document.getElementById('modal-kcal').textContent = '🔥 ' + r.kcal + ' kcal';
+    document.getElementById('n-kcal').textContent = r.kcal;
     document.getElementById('n-protein').textContent = r.protein;
     document.getElementById('n-carbs').textContent = r.carbs;
     document.getElementById('n-fat').textContent = r.fat;
-    document.getElementById('modal-ingredients').innerHTML = r.ingredients.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('modal-ingredients').innerHTML = (r.ingredients||[]).map(x=>`<li>${x}</li>`).join('');
+    // Show steps if available
+    const stepsEl = document.getElementById('modal-steps');
+    if (stepsEl && r.steps) {
+      stepsEl.innerHTML = '<div style="font-size:13px;font-weight:600;color:#9A9690;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px;">Zubereitung</div>' +
+        r.steps.map((s,i)=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #EAE5DD;font-size:13px;"><span style="background:#EBF3EE;color:#3D6B4F;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">${i+1}</span><span>${s}</span></div>`).join('');
+    }
+    document.getElementById('modal').classList.add('open');
+  }
+
+  function openStaticRecipe(id) {
+    const staticRecipes = {
+      omelette: {emoji:'🍳',name:'Spinat-Omelette',time:15,kcal:320,protein:'24g',carbs:'8g',fat:'22g',ingredients:['3 Eier','100g Spinat','50g Käse','Salz & Pfeffer'],steps:['Eier verquirlen','Spinat in Pfanne andünsten','Eiermasse dazugeben','Käse drüberstreuen und falten']},
+      pasta: {emoji:'🍝',name:'Pasta Napoli',time:20,kcal:480,protein:'16g',carbs:'72g',fat:'14g',ingredients:['200g Nudeln','3 Tomaten','2 Knoblauchzehen','Olivenöl, Salz, Basilikum'],steps:['Nudeln kochen','Knoblauch in Öl anbraten','Tomaten dazugeben','Mit Nudeln vermischen']},
+    };
+    const r = staticRecipes[id];
+    if (r) { currentModalRecipe = r; openRecipe(-1); aiRecipes[-1] = r; openRecipe(-1); }
+    // simpler direct call:
+    currentModalRecipe = r;
+    document.getElementById('modal-emoji').textContent = r.emoji;
+    document.getElementById('modal-title').textContent = r.name;
+    document.getElementById('modal-time').textContent = '⏱ ' + r.time + ' Min';
+    document.getElementById('modal-kcal').textContent = '🔥 ' + r.kcal + ' kcal';
+    document.getElementById('n-kcal').textContent = r.kcal;
+    document.getElementById('n-protein').textContent = r.protein;
+    document.getElementById('n-carbs').textContent = r.carbs;
+    document.getElementById('n-fat').textContent = r.fat;
+    document.getElementById('modal-ingredients').innerHTML = r.ingredients.map(x=>`<li>${x}</li>`).join('');
+    const stepsEl = document.getElementById('modal-steps');
+    if (stepsEl) stepsEl.innerHTML = '<div style="font-size:13px;font-weight:600;color:#9A9690;text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px;">Zubereitung</div>' + r.steps.map((s,i)=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #EAE5DD;font-size:13px;"><span style="background:#EBF3EE;color:#3D6B4F;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">${i+1}</span><span>${s}</span></div>`).join('');
     document.getElementById('modal').classList.add('open');
   }
 
@@ -1280,6 +1306,89 @@
     }
   }
 
+  function addToWeekFromModal() {
+    if (!currentModalRecipe) return;
+    const days = Object.keys(weekPlan);
+    const emptyDay = days.find(d => !weekPlan[d]);
+    const day = emptyDay || days[0];
+    weekPlan[day] = currentModalRecipe;
+    localStorage.setItem('fp_week', JSON.stringify(weekPlan));
+    showToast('📅 ' + currentModalRecipe.name + ' am ' + day + ' eingeplant!');
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  function addToShoppingFromModal() {
+    if (!currentModalRecipe) return;
+    (currentModalRecipe.ingredients||[]).forEach(ing => {
+      if (!shoppingList.includes(ing)) shoppingList.push(ing);
+    });
+    localStorage.setItem('fp_shopping', JSON.stringify(shoppingList));
+    showToast('🛒 ' + (currentModalRecipe.ingredients||[]).length + ' Zutaten zur Einkaufsliste!');
+    document.getElementById('modal').classList.remove('open');
+  }
+
+  // ── Week Plan ──
+  const dayLabels = {Mo:'Mo',Di:'Di',Mi:'Mi',Do:'Do',Fr:'Fr',Sa:'Sa',So:'So'};
+  const dayNums = {Mo:3,Di:4,Mi:5,Do:6,Fr:7,Sa:8,So:9};
+
+  function renderWeekPlan() {
+    const container = document.getElementById('week-days-container');
+    if (!container) return;
+    const total = Object.values(weekPlan).filter(Boolean).reduce((s,r)=>s+(r.kcal||0),0);
+    const planned = Object.values(weekPlan).filter(Boolean).length;
+    document.getElementById('week-total-kcal').textContent = planned > 0 ? Math.round(total/planned) + ' kcal/Tag' : '– kcal';
+    document.getElementById('week-planned').textContent = planned + ' von 7 Tagen geplant';
+
+    container.innerHTML = Object.entries(weekPlan).map(([day, meal]) => `
+      <div class="day-card" onclick="${meal ? 'clearDay("'+day+'")' : 'assignDayFromRecipes("'+day+'")'}">
+        <div class="day-name"><div class="day-abbr">${day}</div><div class="day-num">${dayNums[day]}</div></div>
+        <div class="day-dot ${meal?'':'empty'}"></div>
+        <div class="day-info">
+          ${meal
+            ? `<div class="day-meal">${meal.name}</div><div class="day-cal">${meal.kcal} kcal · ${meal.time} Min</div>`
+            : `<div class="day-empty">Tippen zum Hinzufügen</div>`}
+        </div>
+        <div>${meal ? meal.emoji : '<span style="color:#9A9690;font-size:20px;">+</span>'}</div>
+      </div>`).join('');
+  }
+
+  function clearDay(day) {
+    if (confirm(weekPlan[day]?.name + ' entfernen?')) {
+      weekPlan[day] = null;
+      localStorage.setItem('fp_week', JSON.stringify(weekPlan));
+      renderWeekPlan();
+    }
+  }
+
+  function assignDayFromRecipes(day) {
+    if (aiRecipes.length === 0) { showToast('❌ Erst Rezepte generieren!'); navigate('scanner'); return; }
+    const options = aiRecipes.map((r,i) => i + ': ' + r.name).join('\n');
+    const idx = prompt('Welches Rezept für ' + day + '?\n\n' + options + '\n\nNummer eingeben:');
+    if (idx !== null && aiRecipes[+idx]) {
+      weekPlan[day] = aiRecipes[+idx];
+      localStorage.setItem('fp_week', JSON.stringify(weekPlan));
+      renderWeekPlan();
+      showToast('✅ ' + aiRecipes[+idx].name + ' am ' + day + ' eingeplant!');
+    }
+  }
+
+  function generateShoppingList() {
+    shoppingList = [];
+    Object.values(weekPlan).filter(Boolean).forEach(meal => {
+      (meal.ingredients||[]).forEach(ing => { if (!shoppingList.includes(ing)) shoppingList.push(ing); });
+    });
+    localStorage.setItem('fp_shopping', JSON.stringify(shoppingList));
+    if (shoppingList.length === 0) { showToast('❌ Keine Mahlzeiten geplant!'); return; }
+    alert('🛒 Einkaufsliste (' + shoppingList.length + ' Artikel):\n\n' + shoppingList.map(i=>'• '+i).join('\n'));
+    showToast('🛒 ' + shoppingList.length + ' Artikel auf der Liste!');
+  }
+
+  // ── Filters ──
+  function setFilter(btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
   // ── Toast ──
   let toastTimer;
   function showToast(msg) {
@@ -1287,11 +1396,12 @@
     t.textContent = msg;
     t.classList.add('show');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
   }
 
   // ── Init ──
   renderIngredients();
+  renderHomeRecipes();
 </script>
 </body>
 </html>
