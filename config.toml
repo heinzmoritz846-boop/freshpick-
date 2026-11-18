@@ -1,0 +1,20 @@
+# Nur Streamer eintragen, die dir die Erlaubnis zum Clippen/Reposten gegeben haben!
+[streamers]
+channels = ["streamer1", "streamer2"]
+
+[detect]
+window_seconds = 10      # Zeitfenster fuer Chat-Spike
+factor = 3.0             # wie viel mal ueber dem normalen Chat-Level
+min_score = 25           # Mindest-Aktivitaet, damit kleine Chats nicht dauernd triggern
+cooldown_seconds = 90    # Pause nach einem Clip pro Streamer
+keywords = ["gta 6", "gta6", "vice city", "lucia", "jason", "leonida"]
+
+[clip]
+pre_seconds = 25
+post_seconds = 10
+max_seconds = 45
+
+[output]
+dir = "out/ready"
+buffer_dir = "out/buffer"
+hashtags = ["#gta6", "#gta", "#rockstar", "#fyp"]
